@@ -168,6 +168,7 @@ var PeopleView = (function() {
 			<td class="col-sm-3">\
 				<a class="edit btn btn-primary" href="#">Editar</a>\
 				<a class="delete btn btn-warning" href="#">Eliminar</a>\
+				<a class="mascotas btn btn-primary" href="#">Mascotas</a>\
 			</td>\
 		</tr>';
 	};
@@ -183,6 +184,10 @@ var PeopleView = (function() {
 		
 		$('#person-' + person.id + ' a.delete').click(function() {
 			self.deletePerson(person.id);
+		});
+		
+		$('#person-' + person.id + ' a.mascotas').click(function() {
+			self.listPets(person.id);
 		});
 	};
 

@@ -9,8 +9,8 @@ var PetsView = (function() {
 	var formQuery = '#' + formId;
 	var listQuery = '#' + listId;
 	
-	function PetsView(petDao, formContainerId, listContainerId) {
-		dao = petDao;
+	function PetsView(petsDao, formContainerId, listContainerId) {
+		dao = petsDao;
 		self = this;
 		
 		insertPetsForm($('#' + formContainerId));
@@ -90,7 +90,7 @@ var PetsView = (function() {
 				var form = $(formQuery);
 				
 				form.find('input[name="id"]').val(id);
-				form.find('input[name="peson_id"]').val(person_id);
+				form.find('input[name="person_id"]').val(person_id);
 				form.find('input[name="name"]').val(row.find('td.name').text());
 				form.find('input[name="species"]').val(row.find('td.species').text());
 				

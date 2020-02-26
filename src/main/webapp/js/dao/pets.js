@@ -33,7 +33,7 @@ var PeopleDAO = (function() {
 
 	this.modifyPet = function(pet, done, fail, always) {
 	    requestByAjax({
-		url : resourcePath + pet.id + pet.person_id,
+		url : resourcePath + pet.id,
 		type : 'PUT',
 		data : pet
 	    }, done, fail, always);
