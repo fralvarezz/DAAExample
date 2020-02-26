@@ -7,6 +7,14 @@ CREATE TABLE `daaexample`.`people` (
 	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE `daaexample`.`pets` (
+	`id` int NOT NULL AUTO_INCREMENT,
+	`person_id` int NOT NULL,
+	`name` varchar(100) NOT NULL,
+	`species` varchar(100) NOT NULL,
+	PRIMARY KEY (`id`,`person_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 CREATE TABLE `daaexample`.`users` (
 	`login` varchar(100) NOT NULL,
 	`password` varchar(64) NOT NULL,
