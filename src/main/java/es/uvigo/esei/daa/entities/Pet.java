@@ -26,7 +26,7 @@ public class Pet {
 	 */
 	public Pet(int id, int person_id, String name, String species) {
 		this.id = id;
-		this.person_id = person_id;
+		this.setPersonId(person_id);
 		this.setName(name);
 		this.setSpecies(species);
 	}
@@ -47,6 +47,16 @@ public class Pet {
 	 */
 	public int getPersonId() {
 		return person_id;
+	}
+	
+	/**
+	 * Set the name of this person.
+	 * 
+	 * @param name the new name of the person.
+	 * @throws NullPointerException if the {@code name} is {@code null}.
+	 */
+	public void setPersonId(int person_id) {
+		this.person_id = requireNonNull(person_id, "Owner id can't be null");
 	}
 
 	/**
