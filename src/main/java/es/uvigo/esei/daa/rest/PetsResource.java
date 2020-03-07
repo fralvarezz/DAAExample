@@ -101,7 +101,7 @@ public class PetsResource {
 	 * @param name the name of the new pet.
 	 * @param species the species of the new pet.
 	 * @return a 200 OK response with a person that has been created. If the
-	 * name or the surname are not provided, a 400 Bad Request response with an
+	 * name or the species are not provided, a 400 Bad Request response with an
 	 * error message will be returned. If an error happens while retrieving the
 	 * list, a 500 Internal Server Error response with an error message will be
 	 * returned.
@@ -110,10 +110,10 @@ public class PetsResource {
 	public Response add(
 		@FormParam("person_id") int person_id,
 		@FormParam("name") String name, 
-		@FormParam("surname") String surname
+		@FormParam("species") String species
 	) {
 		try {
-			final Pet newPet = this.dao.add(person_id, name, surname);
+			final Pet newPet = this.dao.add(person_id, name, species);
 			
 			return Response.ok(newPet).build();
 		} catch (IllegalArgumentException iae) {
@@ -150,7 +150,7 @@ public class PetsResource {
 		@PathParam("id") int id, 
 		@PathParam("person_id") int person_id,
 		@FormParam("name") String name, 
-		@FormParam("surname") String species
+		@FormParam("species") String species
 	) {
 		try {
 			final Pet modifiedPet = new Pet(id, person_id, name, species);

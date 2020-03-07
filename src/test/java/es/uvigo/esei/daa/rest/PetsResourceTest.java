@@ -137,7 +137,7 @@ public class PetsResourceTest extends JerseyTest {
 	@ExpectedDatabase("/datasets/dataset-add.xml")
 	public void testAdd() throws IOException {
 		final Form form = new Form();
-		//form.param("person_id", newPersonId());
+		form.param("person_id", newPersonId());
 		form.param("name", newName());
 		form.param("species", newSpecies());
 		
@@ -154,7 +154,7 @@ public class PetsResourceTest extends JerseyTest {
 	@Test
 	public void testAddUnauthorized() throws IOException {
 		final Form form = new Form();
-		//form.param("person_id", newPersonId());
+		form.param("person_id", newPersonId());
 		form.param("name", newName());
 		form.param("species", newSpecies());
 		

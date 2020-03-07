@@ -19,9 +19,9 @@ public class IsEqualToPet extends IsEqualToEntity<Pet> {
 			return false;
 		} else {
 			return checkAttribute("id", Pet::getId, actual)
-				&& checkAttribute("name", Pet::getPersonId, actual)
+				&& checkAttribute("person_id", Pet::getPersonId, actual)
 				&& checkAttribute("name", Pet::getName, actual)
-				&& checkAttribute("surname", Pet::getSpecies, actual);
+				&& checkAttribute("species", Pet::getSpecies, actual);
 		}
 	}
 

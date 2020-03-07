@@ -84,15 +84,16 @@ public class PetsDAO extends DAO {
 	 * Persists a new person in the system. An identifier will be assigned
 	 * automatically to the new person.
 	 * 
+	 * @param person_id id of the owner. Can't be {@code null}.
 	 * @param name name of the new pet. Can't be {@code null}.
-	 * @param surname surname of the new pet. Can't be {@code null}.
+	 * @param species species of the new pet. Can't be {@code null}.
 	 * @return a {@link pet} entity representing the persisted pet.
 	 * @throws DAOException if an error happens while persisting the new pet.
 	 * @throws IllegalArgumentException if the name or species are {@code null}.
 	 */
 	public Pet add(int person_id, String name, String species)
 	throws DAOException, IllegalArgumentException {
-		if (name == null || species == null) {
+		if (person_id == 0 || name == null || species == null) {
 			throw new IllegalArgumentException("name and species can't be null");
 		}
 		
@@ -140,12 +141,13 @@ public class PetsDAO extends DAO {
 		}
 		
 		try (Connection conn = this.getConnection()) {
-			final String query = "UPDATE pets SET name=?, species=? WHERE id=?";
+			final String query = "UPDATE pets SET person_id=?, name=?, species=? WHERE id=?";
 			
 			try (PreparedStatement statement = conn.prepareStatement(query)) {
-				statement.setString(1, pet.getName());
-				statement.setString(2, pet.getSpecies());
-				statement.setInt(3, pet.getId());
+				statement.setInt(1, pet.getPersonId());
+				statement.setString(2, pet.getName());
+				statement.setString(3, pet.getSpecies());
+				statement.setInt(4, pet.getId());
 				
 				if (statement.executeUpdate() != 1) {
 					throw new IllegalArgumentException("name and species can't be null");
