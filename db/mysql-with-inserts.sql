@@ -39,3 +39,5 @@ INSERT INTO `daaexample`.`users` (`login`,`password`,`role`)
 VALUES ('admin', '713bfda78870bf9d1b261f565286f85e97ee614efe5f0faf7c34e7ca4f65baca','ADMIN');
 INSERT INTO `daaexample`.`users` (`login`,`password`,`role`)
 VALUES ('normal', '7bf24d6ca2242430343ab7e3efb89559a47784eea1123be989c1b2fb2ef66e83','USER');
+
+INSERT INTO `daaexample`.`pets` (`id`,`person_id`,`name`,`species`) VALUES (0,1,'Toby','Perro');

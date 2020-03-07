@@ -5,9 +5,11 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import es.uvigo.esei.daa.entities.PersonUnitTest;
+import es.uvigo.esei.daa.entities.PetUnitTest;
 
 @SuiteClasses({
-	PersonUnitTest.class
+	PersonUnitTest.class,
+	PetUnitTest.class
 })
 @RunWith(Suite.class)
 public class UnitTestSuite {

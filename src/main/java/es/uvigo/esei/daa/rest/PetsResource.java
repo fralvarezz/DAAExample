@@ -15,9 +15,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import es.uvigo.esei.daa.dao.DAOException;
-import es.uvigo.esei.daa.dao.PeopleDAO;
 import es.uvigo.esei.daa.dao.PetsDAO;
-import es.uvigo.esei.daa.entities.Person;
 import es.uvigo.esei.daa.entities.Pet;
 
 

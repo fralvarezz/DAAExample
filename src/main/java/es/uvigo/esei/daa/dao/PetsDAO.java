@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import es.uvigo.esei.daa.entities.Person;
 import es.uvigo.esei.daa.entities.Pet;
 
 

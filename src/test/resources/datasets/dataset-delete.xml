@@ -14,4 +14,15 @@
 
 	<users login="admin" password="713bfda78870bf9d1b261f565286f85e97ee614efe5f0faf7c34e7ca4f65baca" role="ADMIN"/>
 	<users login="normal" password="7bf24d6ca2242430343ab7e3efb89559a47784eea1123be989c1b2fb2ef66e83" role="USER" />
+	
+	<pets id="1" person_id="1" name="Lili" species="Perro" />
+	<pets id="2" person_id="1" name="Popi" species="Perro" />
+	<pets id="3" person_id="1" name="Miski" species="Perro" />
+	<pets id="4" person_id="1" name="Triski" species="Perro" />
+	<pets id="5" person_id="1" name="Manolete" species="Perro" />
+	<pets id="6" person_id="1" name="Gatete" species="Gato" />
+	<pets id="7" person_id="1" name="Misifu" species="Gato" />
+	<pets id="8" person_id="1" name="Leonidas" species="Gato" />
+	<pets id="9" person_id="1" name="Chungo" species="Gato" />
+	<pets id="10" person_id="1" name="Juan" species="Gato" />
 </dataset>
