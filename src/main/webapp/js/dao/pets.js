@@ -1,4 +1,4 @@
-var PeopleDAO = (function() {
+var PetsDAO = (function() {
     var resourcePath = "rest/pets/";
     var requestByAjax = function(data, done, fail, always) {
 	done = typeof done !== 'undefined' ? done : function() {};
@@ -16,9 +16,9 @@ var PeopleDAO = (function() {
     };
 
     function PetsDAO() {
-	this.listPets = function(done, fail, always) {
+	this.listPetsByOwner = function(person_id, done, fail, always) {
 	    requestByAjax({
-		url : resourcePath,
+		url : resourcePath + "?person_id=" + person_id,
 		type : 'GET'
 	    }, done, fail, always);
 	};
@@ -47,5 +47,5 @@ var PeopleDAO = (function() {
 	};
     }
 
-    return PetDAO;
+    return PetsDAO;
 })();

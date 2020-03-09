@@ -1,5 +1,6 @@
 var PetsView = (function() {
 	var dao;
+	var pId;
 	
 	// Referencia a this que permite acceder a las funciones públicas desde las funciones de jQuery.
 	var self;
@@ -9,15 +10,16 @@ var PetsView = (function() {
 	var formQuery = '#' + formId;
 	var listQuery = '#' + listId;
 	
-	function PetsView(petsDao, formContainerId, listContainerId) {
+	function PetsView(person_id, petsDao, formContainerId, listContainerId) {
 		dao = petsDao;
+		pId = person_id;
 		self = this;
 		
 		insertPetsForm($('#' + formContainerId));
 		insertPetsList($('#' + listContainerId));
 		
 		this.init = function() {
-			dao.listPets(function(pets) {
+			dao.listPetsByOwner(person_id, function(pets) {
 				$.each(pets, function(key, pet) {
 					appendToTable(pet);
 				});
@@ -30,12 +32,13 @@ var PetsView = (function() {
 			// para que el envío sea a través de AJAX
 			$(formQuery).submit(function(event) {
 				var pet = self.getPetInForm();
+				console.log(pet);
 				
 				if (self.isEditing()) {
 					dao.modifyPet(pet,
 						function(pet) {
-							$('#pet-' + pet.id + ' td.name').text(person.name);
-							$('#pet-' + pet.id + ' td.species').text(person.species);
+							$('#pet-' + pet.id + ' td.name').text(pet.name);
+							$('#pet-' + pet.id + ' td.species').text(pet.species);
 							self.resetForm();
 						},
 						showErrorMessage,
@@ -60,9 +63,9 @@ var PetsView = (function() {
 
 		this.getPetInForm = function() {
 			var form = $(formQuery);
+			console.log(pId);
 			return {
 				'id': form.find('input[name="id"]').val(),
-				'person_id': form.find('input[name="person_id"]').val(),
 				'name': form.find('input[name="name"]').val(),
 				'species': form.find('input[name="species"]').val()
 			};
@@ -74,7 +77,7 @@ var PetsView = (function() {
 			if (row !== undefined) {
 				return {
 					'id': id,
-					'person_id' : person_id,
+					'person_id' : pId,
 					'name': row.find('td.name').text(),
 					'species': row.find('td.species').text()
 				};
@@ -90,7 +93,7 @@ var PetsView = (function() {
 				var form = $(formQuery);
 				
 				form.find('input[name="id"]').val(id);
-				form.find('input[name="person_id"]').val(person_id);
+				form.find('input[name="person_id"]').val(pId);
 				form.find('input[name="name"]').val(row.find('td.name').text());
 				form.find('input[name="species"]').val(row.find('td.species').text());
 				
@@ -164,10 +167,10 @@ var PetsView = (function() {
 		);
 	};
 
-	var createPetRow = function(person) {
+	var createPetRow = function(pet) {
 		return '<tr id="pet-'+ pet.id +'" class="row">\
 			<td class="name col-sm-4">' + pet.name + '</td>\
-			<td class="surname col-sm-5">' + pet.species + '</td>\
+			<td class="species col-sm-5">' + pet.species + '</td>\
 			<td class="col-sm-3">\
 				<a class="edit btn btn-primary" href="#">Editar</a>\
 				<a class="delete btn btn-warning" href="#">Eliminar</a>\
@@ -179,7 +182,7 @@ var PetsView = (function() {
 		alert(textStatus + ": " + error);
 	};
 
-	var addRowListeners = function(person) {
+	var addRowListeners = function(pet) {
 		$('#pet-' + pet.id + ' a.edit').click(function() {
 			self.editPet(pet.id);
 		});
@@ -195,5 +198,5 @@ var PetsView = (function() {
 		addRowListeners(pet);
 	};
 	
-	return PetView;
+	return PetsView;
 })();

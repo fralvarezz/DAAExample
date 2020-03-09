@@ -59,11 +59,37 @@ public class PetsDAO extends DAO {
 	 * @return a list with all the pets persisted in the system.
 	 * @throws DAOException if an error happens while retrieving the pets.
 	 */
+	
+	/*
 	public List<Pet> list() throws DAOException {
 		try (final Connection conn = this.getConnection()) {
 			final String query = "SELECT * FROM pets";
 			
 			try (final PreparedStatement statement = conn.prepareStatement(query)) {
+				try (final ResultSet result = statement.executeQuery()) {
+					final List<Pet> pets = new LinkedList<>();
+					
+					while (result.next()) {
+						pets.add(rowToEntity(result));
+					}
+					
+					return pets;
+				}
+			}
+		} catch (SQLException e) {
+			LOG.log(Level.SEVERE, "Error listing pets", e);
+			throw new DAOException(e);
+		}
+	}
+	
+	*/
+	
+	public List<Pet> listWithOwner(int person_id) throws DAOException {
+		try (final Connection conn = this.getConnection()) {
+			final String query = "SELECT * FROM pets where person_id = ?";
+			
+			try (final PreparedStatement statement = conn.prepareStatement(query)) {
+				statement.setInt(1, person_id);
 				try (final ResultSet result = statement.executeQuery()) {
 					final List<Pet> pets = new LinkedList<>();
 					
@@ -141,13 +167,12 @@ public class PetsDAO extends DAO {
 		}
 		
 		try (Connection conn = this.getConnection()) {
-			final String query = "UPDATE pets SET person_id=?, name=?, species=? WHERE id=?";
+			final String query = "UPDATE pets SET name=?, species=? WHERE id=?";
 			
 			try (PreparedStatement statement = conn.prepareStatement(query)) {
-				statement.setInt(1, pet.getPersonId());
-				statement.setString(2, pet.getName());
-				statement.setString(3, pet.getSpecies());
-				statement.setInt(4, pet.getId());
+				statement.setString(1, pet.getName());
+				statement.setString(2, pet.getSpecies());
+				statement.setInt(3, pet.getId());
 				
 				if (statement.executeUpdate() != 1) {
 					throw new IllegalArgumentException("name and species can't be null");

@@ -11,11 +11,13 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import es.uvigo.esei.daa.dao.DAOException;
 import es.uvigo.esei.daa.dao.PetsDAO;
+import es.uvigo.esei.daa.entities.Person;
 import es.uvigo.esei.daa.entities.Pet;
 
 
@@ -85,9 +87,11 @@ public class PetsResource {
 	 * Server Error response with an error message will be returned.
 	 */
 	@GET
-	public Response list() {
+	public Response list(
+			@QueryParam("person_id") int person_id
+	) {
 		try {
-			return Response.ok(this.dao.list()).build();
+			return Response.ok(this.dao.listWithOwner(person_id)).build();
 		} catch (DAOException e) {
 			LOG.log(Level.SEVERE, "Error listing pets", e);
 			return Response.serverError().entity(e.getMessage()).build();
@@ -153,6 +157,7 @@ public class PetsResource {
 		@FormParam("species") String species
 	) {
 		try {
+			//igual hay que cambiarlo
 			final Pet modifiedPet = new Pet(id, person_id, name, species);
 			this.dao.modify(modifiedPet);
 			
