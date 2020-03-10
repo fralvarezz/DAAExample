@@ -7,6 +7,10 @@ var PetsView = (function() {
 	
 	var formId = 'pets-form';
 	var listId = 'pets-list';
+	var formContainerQuery;
+	var listContainerQuery;
+	var container = 'navbar-brand d-flex align-items-center'; //funcionara?
+	
 	var formQuery = '#' + formId;
 	var listQuery = '#' + listId;
 	
@@ -15,8 +19,13 @@ var PetsView = (function() {
 		pId = person_id;
 		self = this;
 		
+		formContainerQuery = '#' + formContainerId;
+		listContainerQuery = '#' + listContainerId;
+		
 		insertPetsForm($('#' + formContainerId));
 		insertPetsList($('#' + listContainerId));
+		
+		insertBackButton($('#' + container));
 		
 		this.init = function() {
 			dao.listPetsByOwner(person_id, function(pets) {
@@ -59,6 +68,7 @@ var PetsView = (function() {
 			});
 			
 			$('#btnClear').click(this.resetForm);
+			$('#btnBack').click(this.goBack);
 		};
 
 		this.getPetInForm = function() {
@@ -111,7 +121,19 @@ var PetsView = (function() {
 				);
 			}
 		};
+		
+		this.goBack = function() {
+			$(formContainerQuery).empty();
+			$(listContainerQuery).empty();
+			
+			$(formContainerQuery).append('<h1 class="display-5 mt-3 mb-3">Personas</h1>');
+			
+		    var view = new PeopleView(new PeopleDAO(),
+		    	'people-container', 'people-container'
+	    	);
 
+		    view.init();
+		}
 		this.isEditing = function() {
 			return $(formQuery + ' input[name="id"]').val() != "";
 		};
@@ -161,9 +183,16 @@ var PetsView = (function() {
 					<div class="col-sm-3">\
 						<input id="btnSubmit" type="submit" value="Crear" class="btn btn-primary" />\
 						<input id="btnClear" type="reset" value="Limpiar" class="btn" />\
+						<input id="btnBack" type="danger" value="Volver" class="btn btn-danger" />\
 					</div>\
 				</div>\
 			</form>'
+		);
+	};
+	
+	var insertBackButton = function(parent) {
+		parent.append(
+			'<a class="back btn btn-primary" href="#">Volver</a>'
 		);
 	};
 

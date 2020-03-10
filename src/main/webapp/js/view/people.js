@@ -115,7 +115,7 @@ var PeopleView = (function() {
 			$(formContainerQuery).empty();
 			$(listContainerQuery).empty();
 
-			$(formContainerQuery).append('<h1 class="display-5 mt-3 mb-3">Pets</h1>');
+			$(formContainerQuery).append('<h1 class="display-5 mt-3 mb-3">Mascotas</h1>');
 			var petsView = new PetsView(id, new PetsDAO(), formContainerId, listContainerId);
 			petsView.init();
 		}
