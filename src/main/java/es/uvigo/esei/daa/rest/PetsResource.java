@@ -152,7 +152,7 @@ public class PetsResource {
 	@Path("/{id}")
 	public Response modify(
 		@PathParam("id") int id, 
-		@PathParam("person_id") int person_id,
+		@FormParam("person_id") int person_id,
 		@FormParam("name") String name, 
 		@FormParam("species") String species
 	) {

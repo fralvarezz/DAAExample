@@ -167,12 +167,13 @@ public class PetsDAO extends DAO {
 		}
 		
 		try (Connection conn = this.getConnection()) {
-			final String query = "UPDATE pets SET name=?, species=? WHERE id=?";
+			final String query = "UPDATE pets SET name=?, person_id=?, species=? WHERE id=?";
 			
 			try (PreparedStatement statement = conn.prepareStatement(query)) {
 				statement.setString(1, pet.getName());
-				statement.setString(2, pet.getSpecies());
-				statement.setInt(3, pet.getId());
+				statement.setInt(2, pet.getPersonId());
+				statement.setString(3, pet.getSpecies());
+				statement.setInt(4, pet.getId());
 				
 				if (statement.executeUpdate() != 1) {
 					throw new IllegalArgumentException("name and species can't be null");

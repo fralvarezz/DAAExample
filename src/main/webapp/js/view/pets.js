@@ -76,6 +76,7 @@ var PetsView = (function() {
 			console.log(pId);
 			return {
 				'id': form.find('input[name="id"]').val(),
+				'person_id': pId,
 				'name': form.find('input[name="name"]').val(),
 				'species': form.find('input[name="species"]').val()
 			};
@@ -103,7 +104,7 @@ var PetsView = (function() {
 				var form = $(formQuery);
 				
 				form.find('input[name="id"]').val(id);
-				form.find('input[name="person_id"]').val(pId);
+				form.find('input[name="person_id"]').val(pId).toString();
 				form.find('input[name="name"]').val(row.find('td.name').text());
 				form.find('input[name="species"]').val(row.find('td.species').text());
 				
