@@ -11,7 +11,7 @@ import es.uvigo.esei.daa.entities.Pet;
 public final class PetsDataset {
 	private PetsDataset() {}
 	
-	public static Pet[] Pets() {
+	public static Pet[] pets() {
 		return new Pet[] {
 			new Pet(1, 1, "Lili", "Perro"),
 			new Pet(2, 1, "Popi", "Perro"),
@@ -32,13 +32,13 @@ public final class PetsDataset {
 		final Predicate<Pet> hasValidId = Pet ->
 			binarySearch(ids, Pet.getId()) < 0;
 		
-		return stream(Pets())
+		return stream(pets())
 			.filter(hasValidId)
 		.toArray(Pet[]::new);
 	}
 	
 	public static Pet Pet(int id) {
-		return stream(Pets())
+		return stream(pets())
 			.filter(Pet -> Pet.getId() == id)
 			.findAny()
 		.orElseThrow(IllegalArgumentException::new);
@@ -73,6 +73,6 @@ public final class PetsDataset {
 	}
 	
 	public static Pet newPet() {
-		return new Pet(Pets().length + 1, 1, newName(), newSpecies());
+		return new Pet(pets().length + 1, Integer.parseInt(newPersonId()), newName(), newSpecies());
 	}
 }

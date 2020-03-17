@@ -7,7 +7,7 @@ import static es.uvigo.esei.daa.dataset.PetsDataset.newPersonId;
 import static es.uvigo.esei.daa.dataset.PetsDataset.newPet;
 import static es.uvigo.esei.daa.dataset.PetsDataset.newSpecies;
 import static es.uvigo.esei.daa.dataset.PetsDataset.nonExistentId;
-import static es.uvigo.esei.daa.dataset.PetsDataset.Pets;
+import static es.uvigo.esei.daa.dataset.PetsDataset.pets;
 import static es.uvigo.esei.daa.dataset.UsersDataset.adminLogin;
 import static es.uvigo.esei.daa.dataset.UsersDataset.normalLogin;
 import static es.uvigo.esei.daa.dataset.UsersDataset.userToken;
@@ -91,9 +91,9 @@ public class PetsResourceTest extends JerseyTest {
 		.get();
 		assertThat(response, hasOkStatus());
 
-		final List<Pet> Pets = response.readEntity(new GenericType<List<Pet>>(){});
+		final List<Pet> pets = response.readEntity(new GenericType<List<Pet>>(){});
 		
-		assertThat(Pets, containsPetsInAnyOrder(Pets()));
+		assertThat(pets, containsPetsInAnyOrder(pets()));
 	}
 	
 	@Test
@@ -134,7 +134,7 @@ public class PetsResourceTest extends JerseyTest {
 	}
 
 	@Test
-	@ExpectedDatabase("/datasets/dataset-add.xml")
+	@ExpectedDatabase("/datasets/dataset-pets-add.xml")
 	public void testAdd() throws IOException {
 		final Form form = new Form();
 		form.param("person_id", newPersonId());
@@ -205,7 +205,7 @@ public class PetsResourceTest extends JerseyTest {
 	}
 
 	@Test
-	@ExpectedDatabase("/datasets/dataset-modify.xml")
+	@ExpectedDatabase("/datasets/dataset-pets-modify.xml")
 	public void testModify() throws IOException {
 		final Form form = new Form();
 		form.param("person_id", newPersonId());
@@ -220,6 +220,7 @@ public class PetsResourceTest extends JerseyTest {
 		final Pet modifiedPet = response.readEntity(Pet.class);
 		
 		final Pet Pet = existentPet();
+		Pet.setPersonId(Integer.parseInt(newPersonId()));
 		Pet.setName(newName());
 		Pet.setSpecies(newSpecies());
 		
@@ -279,7 +280,7 @@ public class PetsResourceTest extends JerseyTest {
 	}
 
 	@Test
-	@ExpectedDatabase("/datasets/dataset-delete.xml")
+	@ExpectedDatabase("/datasets/dataset-pets-delete.xml")
 	public void testDelete() throws IOException {
 		final Response response = target("pets/" + existentId()).request()
 			.header("Authorization", "Basic " + userToken(adminLogin()))

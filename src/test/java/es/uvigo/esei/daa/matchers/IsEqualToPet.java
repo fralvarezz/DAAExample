@@ -34,8 +34,8 @@ public class IsEqualToPet extends IsEqualToEntity<Pet> {
 	 * {@link Pet} as the expected value.
 	 */
 	@Factory
-	public static IsEqualToPet equalsToPet(Pet Pet) {
-		return new IsEqualToPet(Pet);
+	public static IsEqualToPet equalsToPet(Pet pet) {
+		return new IsEqualToPet(pet);
 	}
 	
 	/**
